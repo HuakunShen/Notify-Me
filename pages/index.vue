@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10">
+  <div class="p-10 mx-auto 2xl:w-1/2 xl:w-2/3">
     <div class="">
       <h1 class="text-3xl mb-2">Send Message</h1>
       <div class="grid grid-cols-3 gap-4">
@@ -30,7 +30,7 @@
       </button> -->
       <button class="btn btn-info mt-2" @click="sendMessage">Send</button>
       <div class="response-section mt-5">
-        <h1 class="text-3xl">Response</h1>
+        <h1 class="text-3xl mb-2">Response</h1>
         <textarea class="textarea textarea-info w-full" disabled rows="10">{{
           responseText
         }}</textarea>
