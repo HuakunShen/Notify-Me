@@ -10,4 +10,3 @@ bucket = ".output/public"
 
 [build]
 command = ""
-upload.format = "service-worker"

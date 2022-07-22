@@ -8,13 +8,14 @@
     "build:cloudflare": "NITRO_PRESET=cloudflare yarn build",
     "preview:cloudflare": "npx miniflare .output/server/index.mjs --site .output/public",
     "wrangler:dev": "npx wrangler dev",
-    "publish:cloudflare": "npx wrangler publish"
+    "publish:cloudflare": "npx wrangler publish",
+    "build:netlify": "yarn install && yarn generate && sh netlify-patch.sh"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.14.1",
     "@types/nodemailer": "^6.4.4",
     "nuxt": "3.0.0-rc.6",
-    "wrangler": "^2.0.7"
+    "wrangler": "^2.0.22"
   },
   "dependencies": {
     "@notionhq/client": "^2.1.0",
