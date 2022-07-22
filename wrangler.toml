@@ -1,0 +1,13 @@
+name = "notify-me"
+account_id = "741b020e5dd2db3e41f040f973d614a8"
+workers_dev = true
+
+compatibility_date = "2022-07-22"
+main = ".output/server/index.mjs"
+
+[site]
+bucket = ".output/public"
+
+[build]
+command = ""
+upload.format = "service-worker"

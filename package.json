@@ -2,11 +2,22 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "source .env && nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "build:cloudflare": "NITRO_PRESET=cloudflare yarn build",
+    "preview:cloudflare": "npx miniflare .output/server/index.mjs --site .output/public",
+    "wrangler:dev": "npx wrangler dev",
+    "publish:cloudflare": "npx wrangler publish"
   },
   "devDependencies": {
-    "nuxt": "3.0.0-rc.6"
+    "@cloudflare/workers-types": "^3.14.1",
+    "@types/nodemailer": "^6.4.4",
+    "nuxt": "3.0.0-rc.6",
+    "wrangler": "^2.0.7"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.1.0",
+    "nodemailer": "^6.7.7"
   }
 }
