@@ -2,6 +2,7 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  modules: ['@nuxtjs/tailwindcss'],
   runtimeConfig: {
     // telegram
     telegramBotToken: "5339185966:AAE46f1_Kv1d0bjji08mi8jrCcTat1RmHjE",
@@ -11,7 +12,7 @@ export default defineNuxtConfig({
     emailPort: 587,
     emailFromAddress: "noreply@crosscopy.io",
     emailFromPassword: "crosscopy-9559",
-    emailDefaultToAddress: "huakun.shen@huakunshen.com",
+    emailDefaultToAddress: "huakun.shen@gmail.com",
     emailFromName: "Huakun 💻 Notification System",
     // notion
     notionSecret: "secret_VqrNI1P2e5lQhMiDs7ge435ux5uArNxCK9VNZF6sqth",
