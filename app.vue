@@ -17,10 +17,21 @@ onMounted(() => {
   console.log(theme);
 
   if (!theme) {
-    localStorage.setItem("theme", "dark");
-    setTheme("dark");
+    localStorage.setItem("theme", "business");
+    setTheme("business");
   } else {
     setTheme(theme);
   }
+});
+
+useHead({
+  title: "Notify Me",
+  meta: [
+    {
+      name: "description",
+      content:
+        "A notification app to send message to yourself. It may look useless, but take a second to imagine some use cases.",
+    },
+  ],
 });
 </script>
