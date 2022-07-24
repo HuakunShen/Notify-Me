@@ -11,3 +11,7 @@ This project is for sending notification to oneself.
 - [x] Notion
 - [ ] Slack
 - [ ] Discord
+
+## Documentation
+
+https://documenter.getpostman.com/view/18849321/UzXKXKdv
