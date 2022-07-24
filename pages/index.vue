@@ -1,5 +1,5 @@
 <template>
-  <div class="p-10 mx-auto 2xl:w-1/2 xl:w-2/3">
+  <div class="px-10 mx-auto 2xl:w-1/2 xl:w-2/3">
     <div class="">
       <h1 class="text-3xl mb-2">Send Message</h1>
       <div class="grid grid-cols-3 gap-4">
@@ -9,25 +9,6 @@
           v-model="messageContent"
         ></textarea>
       </div>
-      <!-- <button
-        class="btn btn-circle btn-outline absolute right-20 mt-2"
-        @click="pasteClicked"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="white"
-          viewBox="0 0 512 512"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M320 96V80C320 53.49 298.5 32 272 32H215.4C204.3 12.89 183.6 0 160 0S115.7 12.89 104.6 32H48C21.49 32 0 53.49 0 80v320C0 426.5 21.49 448 48 448l144 .0013L192 176C192 131.8 227.8 96 272 96H320zM160 88C146.8 88 136 77.25 136 64S146.8 40 160 40S184 50.75 184 64S173.3 88 160 88zM416 128v96h96L416 128zM384 224L384 128h-112C245.5 128 224 149.5 224 176v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48V256h-95.99C398.4 256 384 241.6 384 224z"
-          />
-        </svg>
-      </button> -->
       <button class="btn btn-info mt-2" @click="sendMessage">Send</button>
       <div class="response-section mt-5">
         <h1 class="text-3xl mb-2">Response</h1>
@@ -39,42 +20,53 @@
   </div>
 </template>
 <script setup lang="ts">
+import { maxMsgLen } from "~~/src/constant";
+import { setMsgAlert, setErrAlert } from "~~/src/util";
+
 const responseText = ref("");
 const mode = ref<"Telegram" | "Notion" | "Email" | undefined>();
 const messageContent = ref("");
 
 const sendTelegramMsg = (message: string) => {
-  $fetch("/telegram", { method: "post", body: { message } }).then((res) => {
-    responseText.value = JSON.stringify(res, null, 4);
-  });
+  return $fetch("/telegram", { method: "post", body: { message } });
 };
 const sendEmail = (message: string) => {
-  $fetch("/email", { method: "post", body: { message } }).then((res) => {
-    responseText.value = JSON.stringify(res, null, 4);
-  });
+  return $fetch("/email", { method: "post", body: { message } });
 };
 const uploadNotion = (message: string) => {
-  $fetch("/notion", { method: "post", body: { message, tags: ["Web"] } }).then(
-    (res) => {
-      responseText.value = JSON.stringify(res, null, 4);
-    }
-  );
+  return $fetch("/notion", {
+    method: "post",
+    body: { message, tags: ["Web"] },
+  });
 };
 
-const sendMessage = () => {
+const sendMessage = async () => {
   responseText.value = "";
-  switch (mode.value) {
-    case "Telegram":
-      sendTelegramMsg(messageContent.value);
-      break;
-    case "Notion":
-      uploadNotion(messageContent.value);
-      break;
-    case "Email":
-      sendEmail(messageContent.value);
-      break;
-    default:
-      responseText.value = "Wrong Mode";
+  if (messageContent.value.length > maxMsgLen) {
+    setErrAlert(`Message is too long, cannot be longer than ${maxMsgLen}.`);
+  } else if (!mode.value) {
+    setErrAlert("Choose A Mode");
+  } else {
+    let res;
+    switch (mode.value) {
+      case "Telegram":
+        res = await sendTelegramMsg(messageContent.value);
+        break;
+      case "Notion":
+        res = await uploadNotion(messageContent.value);
+        break;
+      case "Email":
+        res = await sendEmail(messageContent.value);
+        break;
+      default:
+        responseText.value = "Wrong Mode";
+    }
+    responseText.value = JSON.stringify(res, null, 4);
+    if (res.ok) {
+      setMsgAlert("Message sent successfully");
+    } else {
+      setErrAlert("Something went wrong");
+    }
   }
 };
 </script>
