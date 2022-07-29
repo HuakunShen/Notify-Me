@@ -8,6 +8,7 @@
           name="mode"
           class="radio checked:bg-red-500"
           @click="onClick(mode)"
+          :checked="mode === 'Telegram'"
         />
       </label>
     </div>

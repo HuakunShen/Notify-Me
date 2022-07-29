@@ -1,4 +1,5 @@
 import { sendTelegramMessage } from "~~/src/telegram";
+import { composeMessage, queryVarToString } from "~~/src/util";
 
 export default defineEventHandler((event) => {
   const config = useRuntimeConfig();
@@ -6,7 +7,11 @@ export default defineEventHandler((event) => {
     throw new Error("Telegram not Enabled");
   const query = useQuery(event);
   return sendTelegramMessage(
-    query.message as string,
+    composeMessage(
+      queryVarToString(query.name),
+      queryVarToString(query.email),
+      queryVarToString(query.message)
+    ),
     config.telegramBotToken,
     config.telegramChatId
   ).then((res: { [key: string]: string | boolean | number }) => {

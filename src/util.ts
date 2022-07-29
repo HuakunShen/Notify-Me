@@ -17,3 +17,26 @@ export const setErrAlert = (message: string) => {
     msg.value = "";
   }, 2000);
 };
+
+export const composeMessage = (
+  name: string,
+  email: string,
+  message: string
+): string => {
+  let composedBody: string = "";
+  if (name) composedBody += `${name} `;
+  if (email) composedBody += `(${email}) `;
+  if (name || email) composedBody += "said: ";
+  composedBody += message;
+  return composedBody;
+};
+
+export const queryVarToString = (
+  queryVar: string | string[] | undefined | null
+) => {
+  if (!queryVar) return "";
+  if (queryVar instanceof Array) {
+    return queryVar.join(", ");
+  }
+  return queryVar;
+};

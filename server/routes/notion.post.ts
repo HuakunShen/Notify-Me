@@ -10,6 +10,8 @@ export default defineEventHandler((event) => {
       return uploadNotionMessage(
         body.message,
         body.tags as string[],
+        body.name || "",
+        body.email || "",
         config.notionDatabaseId,
         config.notionSecret
       );

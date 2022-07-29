@@ -1,4 +1,5 @@
 import { sendTelegramMessage } from "~~/src/telegram";
+import { composeMessage } from "~~/src/util";
 
 export default defineEventHandler((event) => {
   const config = useRuntimeConfig();
@@ -7,7 +8,7 @@ export default defineEventHandler((event) => {
   return useBody(event)
     .then((body) => {
       return sendTelegramMessage(
-        body.message,
+        composeMessage(body.name, body.email, body.message || "no message"),
         config.telegramBotToken,
         config.telegramChatId
       );
