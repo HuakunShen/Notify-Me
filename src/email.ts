@@ -6,7 +6,7 @@ export const sendEmail = (
   fromName: string,
   fromEmail: string,
   fromPassword: string,
-  toEmail: string[],
+  toEmail: string,
   message: string,
   subject = "Notify Me Message"
 ) => {
@@ -23,7 +23,7 @@ export const sendEmail = (
   // send mail with defined transport object
   return transporter.sendMail({
     from: `"${fromName}" ${fromEmail}`, // sender address
-    to: toEmail.join(", "),
+    to: toEmail,
     subject: subject, // Subject line
     text: message, // plain text body
   });
