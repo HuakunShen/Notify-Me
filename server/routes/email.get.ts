@@ -1,6 +1,11 @@
 import { sendEmail } from "~~/src/email";
 
 export default defineEventHandler((event) => {
+  if (!event.context.auth)
+    return {
+      ok: false,
+      error: "Not Authenticated, Please Include Correct Password",
+    };
   const config = useRuntimeConfig();
   if (
     !config.emailHost ||
@@ -12,9 +17,9 @@ export default defineEventHandler((event) => {
     throw new Error("Email not Enabled");
   const query = useQuery(event);
   let message = query.message as string;
-  message += `\n\nName: ${query.name}`
-  message += `\nemail: ${query.email}`
-  
+  message += `\n\nName: ${query.name}`;
+  message += `\nemail: ${query.email}`;
+
   return sendEmail(
     config.emailHost,
     config.emailPort,

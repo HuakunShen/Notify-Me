@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     notionSecret: process.env.notionSecret,
     notionDatabaseId: process.env.notionDatabaseId,
 
+    password: process.env.password,
     public: {},
   },
 });

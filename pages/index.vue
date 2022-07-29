@@ -20,7 +20,27 @@
           </label>
           <input type="text" v-model="email" class="input input-bordered" />
         </div>
-        <br />
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <div class="indicator">
+            <span class="indicator-item badge">
+              <div
+                class="tooltip"
+                data-tip="You may or may not need this depeneding on whether it's enabled in the backend"
+              >
+                ?
+              </div>
+            </span>
+            <input
+              type="text"
+              v-model="password"
+              class="input input-bordered"
+            />
+          </div>
+        </div>
+
         <button type="submit" class="btn btn-info mt-2">Send</button>
       </form>
       <div class="response-section mt-5">
@@ -39,20 +59,42 @@ import { setMsgAlert, setErrAlert } from "~~/src/util";
 const responseText = ref("");
 const name = ref("");
 const email = ref("");
+const password = ref("");
 
 const mode = ref<"Telegram" | "Notion" | "Email">("Telegram");
 const messageContent = ref("");
 
-const sendTelegramMsg = (message: string, name: string, email: string) => {
-  return $fetch("/telegram", { method: "post", body: { message, email, name } });
+const sendTelegramMsg = (
+  message: string,
+  name: string,
+  email: string,
+  password: string
+) => {
+  return $fetch("/telegram", {
+    method: "post",
+    body: { message, email, name, password },
+  });
 };
-const sendEmail = (message: string, name: string, email: string) => {
-  return $fetch("/email", { method: "post", body: { message, email, name } });
+const sendEmail = (
+  message: string,
+  name: string,
+  email: string,
+  password: string
+) => {
+  return $fetch("/email", {
+    method: "post",
+    body: { message, email, name, password },
+  });
 };
-const uploadNotion = (message, name: string, email: string) => {
+const uploadNotion = (
+  message,
+  name: string,
+  email: string,
+  password: string
+) => {
   return $fetch("/notion", {
     method: "post",
-    body: { message, email, name, tags: ["Web"] },
+    body: { message, email, name, password, tags: ["Web"] },
   });
 };
 
@@ -67,13 +109,28 @@ const sendMessage = async (e: SubmitEvent) => {
     let res;
     switch (mode.value) {
       case "Telegram":
-        res = await sendTelegramMsg(messageContent.value, name.value, email.value);
+        res = await sendTelegramMsg(
+          messageContent.value,
+          name.value,
+          email.value,
+          password.value
+        );
         break;
       case "Notion":
-        res = await uploadNotion(messageContent.value, name.value, email.value);
+        res = await uploadNotion(
+          messageContent.value,
+          name.value,
+          email.value,
+          password.value
+        );
         break;
       case "Email":
-        res = await sendEmail(messageContent.value, name.value, email.value);
+        res = await sendEmail(
+          messageContent.value,
+          name.value,
+          email.value,
+          password.value
+        );
         break;
       default:
         responseText.value = "Wrong Mode";

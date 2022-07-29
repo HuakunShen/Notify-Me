@@ -1,6 +1,11 @@
 import { uploadNotionMessage } from "~~/src/notion";
 
 export default defineEventHandler((event) => {
+  if (!event.context.auth)
+    return {
+      ok: false,
+      error: "Not Authenticated, Please Include Correct Password",
+    };
   const config = useRuntimeConfig();
   if (!config.notionSecret || !config.notionDatabaseId)
     throw new Error("Notion not Enabled");
