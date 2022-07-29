@@ -34,7 +34,7 @@
               </div>
             </span>
             <input
-              type="text"
+              type="password"
               v-model="password"
               class="input input-bordered"
             />
