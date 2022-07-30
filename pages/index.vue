@@ -3,7 +3,7 @@
     <div>
       <h1 class="text-3xl mb-2">Send Message</h1>
       <form class="grid grid-cols-3 gap-4" @submit="sendMessage">
-        <mode-choice class="col-span-1" v-model="mode" />
+        <mode-choice class="col-span-1" v-model="mode" :modes="modes" />
         <textarea
           class="textarea textarea-info w-full col-span-2"
           v-model="messageContent"
@@ -20,7 +20,7 @@
           </label>
           <input type="text" v-model="email" class="input input-bordered" />
         </div>
-        <div class="form-control">
+        <div class="form-control" v-if="passwordEnabled">
           <label class="label">
             <span class="label-text">Password</span>
           </label>
@@ -40,7 +40,7 @@
             />
           </div>
         </div>
-
+        <br />
         <button type="submit" class="btn btn-info mt-2">Send</button>
       </form>
       <div class="response-section mt-5">
@@ -55,6 +55,7 @@
 <script setup lang="ts">
 import { maxMsgLen } from "~~/src/constant";
 import { setMsgAlert, setErrAlert } from "~~/src/util";
+import { modeChoices } from "~~/src/types";
 
 const responseText = ref("");
 const name = ref("");
@@ -63,6 +64,7 @@ const password = ref("");
 
 const mode = ref<"Telegram" | "Notion" | "Email">("Telegram");
 const messageContent = ref("");
+const modes = ref<modeChoices[]>([]);
 
 const sendTelegramMsg = (
   message: string,
@@ -143,4 +145,16 @@ const sendMessage = async (e: SubmitEvent) => {
     }
   }
 };
+
+const { data } = await useFetch("/services");
+
+const {
+  email: emailEnabled,
+  notion: notionEnabled,
+  password: passwordEnabled,
+  telegram: telegramEnabled,
+} = data.value;
+if (emailEnabled) modes.value.push("Email");
+if (notionEnabled) modes.value.push("Notion");
+if (telegramEnabled) modes.value.push("Telegram");
 </script>
