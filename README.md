@@ -40,3 +40,33 @@ Think about when you need to send message to yourself using an API.
 ## API Documentation
 
 https://documenter.getpostman.com/view/18849321/UzXKXKdv
+
+## .env
+
+`.env` file contains the environment variables, sample file is below.
+
+```
+telegramBotToken="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+telegramChatId="xxx"
+
+emailHost="mail.privateemail.com"
+emailPort=587
+emailFromAddress="xxx"
+emailFromPassword="xxx"
+emailDefaultToAddress="xxx"
+emailFromName="Huakun 💻 Notification System"
+
+notionSecret="secret_xxx"
+notionDatabaseId="xxx"
+
+password="xxx"
+```
+
+All env vars needs to be set to enable a service.
+
+For example,
+
+- not setting `password` will disable password checking feature.
+- not setting `emailFromAddress` will disable email sending feature.
+
+Disabled features will not be displayed in frontend.
