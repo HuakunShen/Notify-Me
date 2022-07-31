@@ -20,7 +20,7 @@
           </label>
           <input type="text" v-model="email" class="input input-bordered" />
         </div>
-        <div class="form-control" v-if="passwordEnabled">
+        <div class="form-control" v-if="services.password">
           <label class="label">
             <span class="label-text">Password</span>
           </label>
@@ -40,8 +40,7 @@
             />
           </div>
         </div>
-        <br />
-        <button type="submit" class="btn btn-info mt-2">Send</button>
+        <button type="submit" class="block btn btn-info mt-2">Send</button>
       </form>
       <div class="response-section mt-5">
         <h1 class="text-3xl mb-2">Response</h1>
@@ -146,15 +145,10 @@ const sendMessage = async (e: SubmitEvent) => {
   }
 };
 
-const { data } = await useFetch("/services");
-
-const {
-  email: emailEnabled,
-  notion: notionEnabled,
-  password: passwordEnabled,
-  telegram: telegramEnabled,
-} = data.value;
-if (emailEnabled) modes.value.push("Email");
-if (notionEnabled) modes.value.push("Notion");
-if (telegramEnabled) modes.value.push("Telegram");
+const services = await $fetch("/services", {
+  method: "get",
+});
+if (services.email) modes.value.push("Email");
+if (services.notion) modes.value.push("Notion");
+if (services.telegram) modes.value.push("Telegram");
 </script>
