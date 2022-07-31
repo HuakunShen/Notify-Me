@@ -2,42 +2,44 @@
   <div class="px-10 mx-auto 2xl:w-1/2 xl:w-2/3">
     <div>
       <h1 class="text-3xl mb-2">Send Message</h1>
-      <form class="grid grid-cols-3 gap-4" @submit="sendMessage">
-        <mode-choice class="col-span-1" v-model="mode" :modes="modes" />
-        <textarea
-          class="textarea textarea-info w-full col-span-2"
-          v-model="messageContent"
-        ></textarea>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Your Name</span>
-          </label>
-          <input type="text" v-model="name" class="input input-bordered" />
-        </div>
-        <div class="form-control">
-          <label class="label">
-            <span class="label-text">Your Email</span>
-          </label>
-          <input type="text" v-model="email" class="input input-bordered" />
-        </div>
-        <div class="form-control" v-if="services.password">
-          <label class="label">
-            <span class="label-text">Password</span>
-          </label>
-          <div class="indicator">
-            <span class="indicator-item badge">
-              <div
-                class="tooltip"
-                data-tip="You may or may not need this depeneding on whether it's enabled in the backend"
-              >
-                ?
-              </div>
-            </span>
-            <input
-              type="password"
-              v-model="password"
-              class="input input-bordered"
-            />
+      <form @submit="sendMessage">
+        <div class="grid grid-cols-3 gap-4">
+          <mode-choice class="col-span-1" v-model="mode" :modes="modes" />
+          <textarea
+            class="textarea textarea-info w-full col-span-2"
+            v-model="messageContent"
+          ></textarea>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Your Name</span>
+            </label>
+            <input type="text" v-model="name" class="input input-bordered" />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Your Email</span>
+            </label>
+            <input type="text" v-model="email" class="input input-bordered" />
+          </div>
+          <div class="form-control" v-if="services.password">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <div class="indicator">
+              <span class="indicator-item badge">
+                <div
+                  class="tooltip"
+                  data-tip="You may or may not need this depeneding on whether it's enabled in the backend"
+                >
+                  ?
+                </div>
+              </span>
+              <input
+                type="password"
+                v-model="password"
+                class="input input-bordered"
+              />
+            </div>
           </div>
         </div>
         <button type="submit" class="block btn btn-info mt-2">Send</button>
