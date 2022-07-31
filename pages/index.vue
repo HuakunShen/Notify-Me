@@ -148,13 +148,8 @@ const sendMessage = async (e: SubmitEvent) => {
 
 const { data } = await useFetch("/services");
 
-const {
-  email: emailEnabled,
-  notion: notionEnabled,
-  password: passwordEnabled,
-  telegram: telegramEnabled,
-} = data.value;
-if (emailEnabled) modes.value.push("Email");
-if (notionEnabled) modes.value.push("Notion");
-if (telegramEnabled) modes.value.push("Telegram");
+const services = data.value;
+if (services.email) modes.value.push("Email");
+if (services.notion) modes.value.push("Notion");
+if (services.telegram) modes.value.push("Telegram");
 </script>
