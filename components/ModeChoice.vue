@@ -31,4 +31,8 @@ const emit = defineEmits(["update:modelValue"]);
 const onClick = (mode: modeChoices) => {
   emit("update:modelValue", mode);
 };
+onMounted(() => {
+  if (props.modes.length > 0) emit("update:modelValue", props.modes[0]);
+
+})
 </script>
