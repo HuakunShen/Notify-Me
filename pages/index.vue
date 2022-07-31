@@ -147,6 +147,7 @@ const sendMessage = async (e: SubmitEvent) => {
 };
 
 const { data } = await useFetch("/services");
+console.log(data.value);
 
 const services = data.value;
 if (services.email) modes.value.push("Email");
