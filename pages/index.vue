@@ -106,6 +106,8 @@ const sendMessage = async (e: SubmitEvent) => {
   responseText.value = "";
   if (messageContent.value.length > maxMsgLen) {
     setErrAlert(`Message is too long, cannot be longer than ${maxMsgLen}.`);
+  } else if (messageContent.value.length === 0) {
+    setErrAlert(`Message Cannot Be Empty.`);
   } else if (!mode.value) {
     setErrAlert("Choose A Mode");
   } else {

@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout>
-    <div class="px-5 alert-section">
+    <div class="px-5 alert-section w-full absolute">
       <msg-alert :msg="msg" />
       <error-alert :msg="error" />
     </div>
