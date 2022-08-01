@@ -2,14 +2,16 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ["@nuxtjs/tailwindcss"],
   runtimeConfig: {
     // telegram
     telegramBotToken: process.env.telegramBotToken,
     telegramChatId: process.env.telegramChatId,
     // email
     emailHost: process.env.emailHost,
-    emailPort: process.env.emailPort ? parseInt(process.env.emailPort) : undefined,
+    emailPort: process.env.emailPort
+      ? parseInt(process.env.emailPort)
+      : undefined,
     emailFromAddress: process.env.emailFromAddress,
     emailFromPassword: process.env.emailFromPassword,
     emailDefaultToAddress: process.env.emailDefaultToAddress,
@@ -19,6 +21,9 @@ export default defineNuxtConfig({
     notionDatabaseId: process.env.notionDatabaseId,
 
     password: process.env.password,
-    public: {},
+    public: {
+      enableUI: process.env.enableUI,
+      appName: process.env.appName || "Notify Me",
+    },
   },
 });

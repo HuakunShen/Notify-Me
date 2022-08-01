@@ -1,16 +1,25 @@
 <template>
-  <NuxtLayout>
+  <NuxtLayout
+    v-if="
+      config.public.enableUI === undefined || config.public.enableUI === 'true'
+    "
+  >
     <div class="px-5 alert-section w-full absolute">
       <msg-alert :msg="msg" />
       <error-alert :msg="error" />
     </div>
     <NuxtPage />
   </NuxtLayout>
+  <div v-else class="h-screen flex justify-center items-center">
+    <h1 class="text-9xl">404</h1>
+  </div>
 </template>
 <script setup lang="ts">
 import { setTheme } from "~~/src/util";
+
 const msg = useMsg();
 const error = useErrorMsg();
+const config = useRuntimeConfig();
 
 onMounted(() => {
   const theme = localStorage.getItem("theme");
