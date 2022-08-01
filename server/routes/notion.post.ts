@@ -13,8 +13,8 @@ export default defineEventHandler((event) => {
   return useBody(event)
     .then((body) => {
       return uploadNotionMessage(
-        body.message,
-        body.tags as string[],
+        body.message || "",
+        (body.tags || []) as string[],
         body.name || "",
         body.email || "",
         config.notionDatabaseId,

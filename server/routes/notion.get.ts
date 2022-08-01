@@ -20,10 +20,10 @@ export default defineEventHandler((event) => {
     : [];
 
   return uploadNotionMessage(
-    query.message as string,
+    (query.message || "") as string,
     tags as string[],
-    query.name as string,
-    query.email as string,
+    (query.name || "") as string,
+    (query.email || "") as string,
     config.notionDatabaseId,
     config.notionSecret
   ).then((res) => {
