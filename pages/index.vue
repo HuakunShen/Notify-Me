@@ -152,7 +152,7 @@ const sendMessage = async (e: SubmitEvent) => {
 const services = await $fetch("/services", {
   method: "get",
 });
-if (services.email) modes.value.push("Email");
-if (services.notion) modes.value.push("Notion");
 if (services.telegram) modes.value.push("Telegram");
+if (services.notion) modes.value.push("Notion");
+if (services.email) modes.value.push("Email");
 </script>
