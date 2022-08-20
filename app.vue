@@ -4,10 +4,6 @@
       config.public.enableUI === undefined || config.public.enableUI === 'true'
     "
   >
-    <div class="px-5 alert-section w-full absolute">
-      <msg-alert :msg="msg" />
-      <error-alert :msg="error" />
-    </div>
     <NuxtPage />
   </NuxtLayout>
   <div v-else class="h-screen flex justify-center items-center">
