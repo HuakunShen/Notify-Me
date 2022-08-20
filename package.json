@@ -16,12 +16,13 @@
     "@nuxtjs/tailwindcss": "^5.3.0",
     "@types/nodemailer": "^6.4.4",
     "daisyui": "^2.19.1",
-    "nuxt": "3.0.0-rc.6",
+    "nuxt": "3.0.0-rc.8",
     "wrangler": "^2.0.22"
   },
   "dependencies": {
     "@notionhq/client": "^2.1.0",
     "@vueuse/core": "^8.9.4",
+    "element-plus": "^2.2.14",
     "nodemailer": "^6.7.7"
   }
 }

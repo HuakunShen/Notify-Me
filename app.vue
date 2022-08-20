@@ -17,8 +17,6 @@
 <script setup lang="ts">
 import { setTheme } from "~~/src/util";
 
-const msg = useMsg();
-const error = useErrorMsg();
 const config = useRuntimeConfig();
 
 onMounted(() => {

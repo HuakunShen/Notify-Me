@@ -55,8 +55,8 @@
 </template>
 <script setup lang="ts">
 import { maxMsgLen } from "~~/src/constant";
-import { setMsgAlert, setErrAlert } from "~~/src/util";
 import { modeChoices } from "~~/src/types";
+import { ElNotification } from "element-plus";
 
 const responseText = ref("");
 const name = ref("");
@@ -105,11 +105,23 @@ const sendMessage = async (e: SubmitEvent) => {
   e.preventDefault();
   responseText.value = "";
   if (messageContent.value.length > maxMsgLen) {
-    setErrAlert(`Message is too long, cannot be longer than ${maxMsgLen}.`);
+    ElNotification({
+      title: "Error",
+      message: `Message is too long, cannot be longer than ${maxMsgLen}.`,
+      type: "error",
+    });
   } else if (messageContent.value.length === 0) {
-    setErrAlert(`Message Cannot Be Empty.`);
+    ElNotification({
+      title: "Error",
+      message: `Message Cannot Be Empty.`,
+      type: "error",
+    });
   } else if (!mode.value) {
-    setErrAlert("Choose A Mode");
+    ElNotification({
+      title: "Error",
+      message: "Choose A Mode",
+      type: "error",
+    });
   } else {
     let res;
     switch (mode.value) {
@@ -142,9 +154,17 @@ const sendMessage = async (e: SubmitEvent) => {
     }
     responseText.value = JSON.stringify(res, null, 4);
     if (res.ok) {
-      setMsgAlert("Message sent successfully");
+      ElNotification({
+        title: "Success",
+        message: `Message sent successfully`,
+        type: "success",
+      });
     } else {
-      setErrAlert("Something went wrong");
+      ElNotification({
+        title: "Success",
+        message: "Something went wrong",
+        type: "success",
+      });
     }
   }
 };
