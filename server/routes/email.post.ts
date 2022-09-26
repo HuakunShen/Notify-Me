@@ -21,7 +21,10 @@ export default defineEventHandler((event) => {
     let message = body.message as string;
     message += `\n\nName: ${body.name}`;
     message += `\nemail: ${emails}`;
-
+    const ip = JSON.stringify(
+      event.req.headers["x-forwarded-for"] || event.req.socket.remoteAddress
+    );
+    message += `\nIP: ${ip}`;
     return sendEmail(
       config.emailHost,
       config.emailPort,

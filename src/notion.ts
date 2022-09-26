@@ -6,7 +6,8 @@ export const uploadNotionMessage = (
   name: string,
   email: string,
   databaseId: string,
-  token: string
+  token: string,
+  ip: string
 ) => {
   const client = new Client({
     auth: token,
@@ -18,6 +19,7 @@ export const uploadNotionMessage = (
         Message: { rich_text: [{ text: { content: message } }] },
         Name: { title: [{ text: { content: name } }] },
         Email: { rich_text: [{ text: { content: email } }] },
+        IP: { rich_text: [{ text: { content: ip } }] },
         Tags: {
           multi_select: tags.map((tag) => ({ name: tag })),
         },
