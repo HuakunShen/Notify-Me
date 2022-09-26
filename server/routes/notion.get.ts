@@ -18,6 +18,9 @@ export default defineEventHandler((event) => {
       ? query.tag
       : [query.tag]
     : [];
+  const ip = JSON.stringify(
+    event.req.headers["x-forwarded-for"] || event.req.socket.remoteAddress
+  );
 
   return uploadNotionMessage(
     (query.message || "") as string,
@@ -25,7 +28,8 @@ export default defineEventHandler((event) => {
     (query.name || "") as string,
     (query.email || "") as string,
     config.notionDatabaseId,
-    config.notionSecret
+    config.notionSecret,
+    ip
   ).then((res) => {
     return { ok: true };
   });

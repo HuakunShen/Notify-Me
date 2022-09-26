@@ -9,6 +9,9 @@ export default defineEventHandler((event) => {
   const config = useRuntimeConfig();
   if (!config.notionSecret || !config.notionDatabaseId)
     throw new Error("Notion not Enabled");
+  const ip = JSON.stringify(
+    event.req.headers["x-forwarded-for"] || event.req.socket.remoteAddress
+  );
 
   return useBody(event)
     .then((body) => {
@@ -18,7 +21,8 @@ export default defineEventHandler((event) => {
         body.name || "",
         body.email || "",
         config.notionDatabaseId,
-        config.notionSecret
+        config.notionSecret,
+        ip
       );
     })
     .then((res) => {
