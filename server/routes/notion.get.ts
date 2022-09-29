@@ -2,6 +2,8 @@ import { uploadNotionMessage } from "~~/src/notion";
 import { composeMessage, queryVarToString } from "~~/src/util";
 
 export default defineEventHandler((event) => {
+  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+
   if (!event.context.auth)
     return {
       ok: false,
