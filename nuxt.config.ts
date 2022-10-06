@@ -12,10 +12,11 @@ export default defineNuxtConfig({
   vite: {
     server: {
       proxy: {
-        "/": {
+        "/api": {
           ws: true,
           changeOrigin: true,
-          target: "https://deploy-preview-5--notify-huakun.netlify.app/"
+          // target: "https://deploy-preview-5--notify-huakun.netlify.app/"
+          rewrite: (path) => path.replace(/^\/api/, '')
         },
       },
     },
