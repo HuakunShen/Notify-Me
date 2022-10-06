@@ -4,15 +4,13 @@ const lifecycle = process.env.npm_lifecycle_event;
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   css: ["element-plus/dist/index.css"],
+  nitro: {
+    preset: "netlify",
+  },
   // build: {transpile: ['element-plus']}
   build: {
     transpile:
       lifecycle === "build" || lifecycle === "generate" ? ["element-plus"] : [],
-  },
-  vite: {
-    server: {
-      cors: true,
-    },
   },
   runtimeConfig: {
     // telegram

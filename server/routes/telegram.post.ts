@@ -3,6 +3,10 @@ import { composeMessage } from "~~/src/util";
 
 export default defineEventHandler((event) => {
   setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+  setResponseHeader(event, "Access-Control-Allow-Methods", "*");
+  setResponseHeader(event, "Access-Control-Allow-Headers", "*");
+  setResponseHeader(event, "Access-Control-Max-Age", "2592000");
+
 
   if (!event.context.auth)
     return {
