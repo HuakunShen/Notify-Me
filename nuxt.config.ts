@@ -11,7 +11,9 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      cors: true,
+      cors: {
+        origin: true
+      },
     },
   },
   runtimeConfig: {
