@@ -16,26 +16,25 @@ export default defineEventHandler((event) => {
   )
     throw new Error("Email not Enabled");
 
-  return useBody(event).then((body) => {
-    const emails = body.emails.join(", ");
-    let message = body.message as string;
-    message += `\n\nName: ${body.name}`;
-    message += `\nemail: ${emails}`;
-    const ip = JSON.stringify(
-      event.req.headers["x-forwarded-for"] || event.req.socket.remoteAddress
-    );
-    message += `\nIP: ${ip}`;
-    return sendEmail(
-      config.emailHost,
-      config.emailPort,
-      config.emailFromName || config.emailFromAddress,
-      config.emailFromAddress,
-      config.emailFromPassword,
-      emails,
-      message,
-      "Notify Me Message"
-    ).then((res) => {
-      return { ok: true };
-    });
+  const body = event.context.body;
+  const emails = body.email;
+  let message = body.message as string;
+  message += `\n\nName: ${body.name}`;
+  message += `\nemail: ${emails}`;
+  const ip = JSON.stringify(
+    event.req.headers["x-forwarded-for"] || event.req.socket.remoteAddress
+  );
+  message += `\nIP: ${ip}`;
+  return sendEmail(
+    config.emailHost,
+    config.emailPort,
+    config.emailFromName || config.emailFromAddress,
+    config.emailFromAddress,
+    config.emailFromPassword,
+    emails,
+    message,
+    "Notify Me Message"
+  ).then((res) => {
+    return { ok: true };
   });
 });
