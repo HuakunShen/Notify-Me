@@ -1,6 +1,8 @@
 import { queryVarToString } from "~~/src/util";
 
 export default defineEventHandler(async (event) => {
+  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+  
   if (event.req.method === "GET") {
     const query = useQuery(event);
     query.name = queryVarToString(query.name);

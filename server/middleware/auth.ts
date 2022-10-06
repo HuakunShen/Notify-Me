@@ -1,4 +1,6 @@
 export default defineEventHandler(async (event) => {
+  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+
   const config = useRuntimeConfig();
   if (event.req.method === "GET") {
     const query = useQuery(event);
