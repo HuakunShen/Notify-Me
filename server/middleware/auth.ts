@@ -1,9 +1,4 @@
 export default defineEventHandler(async (event) => {
-  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
-  setResponseHeader(event, "Access-Control-Allow-Methods", "*");
-  setResponseHeader(event, "Access-Control-Allow-Headers", "*");
-  setResponseHeader(event, "Access-Control-Max-Age", "2592000");
-  
   const config = useRuntimeConfig();
   if (event.req.method === "GET") {
     const query = useQuery(event);
