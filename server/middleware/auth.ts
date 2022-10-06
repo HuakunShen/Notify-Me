@@ -1,5 +1,6 @@
 export default defineEventHandler(async (event) => {
   setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+  setResponseHeader(event, "Access-Control-Allow-Methods", "GET,POST,OPTIONS");
 
   const config = useRuntimeConfig();
   if (event.req.method === "GET") {
