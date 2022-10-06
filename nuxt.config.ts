@@ -11,8 +11,10 @@ export default defineNuxtConfig({
   },
   vite: {
     server: {
-      cors: {
-        origin: true
+      proxy: {
+        "/telegram": {
+          changeOrigin: true,
+        },
       },
     },
   },
