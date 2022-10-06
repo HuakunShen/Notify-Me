@@ -17,8 +17,6 @@ const config = useRuntimeConfig();
 
 onMounted(() => {
   const theme = localStorage.getItem("theme");
-  console.log(theme);
-
   if (!theme) {
     localStorage.setItem("theme", "business");
     setTheme("business");

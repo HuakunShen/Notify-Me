@@ -1,8 +1,6 @@
 import { uploadNotionMessage } from "~~/src/notion";
 
 export default defineEventHandler((event) => {
-  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
-
   if (!event.context.auth)
     return {
       ok: false,
@@ -14,20 +12,16 @@ export default defineEventHandler((event) => {
   const ip = JSON.stringify(
     event.req.headers["x-forwarded-for"] || event.req.socket.remoteAddress
   );
-
-  return useBody(event)
-    .then((body) => {
-      return uploadNotionMessage(
-        body.message || "",
-        (body.tags || []) as string[],
-        body.name || "",
-        body.email || "",
-        config.notionDatabaseId,
-        config.notionSecret,
-        ip
-      );
-    })
-    .then((res) => {
-      return { ok: true };
-    });
+  const body = event.context.body;
+  return uploadNotionMessage(
+    body.message || "",
+    (body.tags || []) as string[],
+    body.name || "",
+    body.email || "",
+    config.notionDatabaseId,
+    config.notionSecret,
+    ip
+  ).then((res) => {
+    return { ok: true };
+  });
 });

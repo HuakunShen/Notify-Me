@@ -2,8 +2,6 @@ import { uploadNotionMessage } from "~~/src/notion";
 import { composeMessage, queryVarToString } from "~~/src/util";
 
 export default defineEventHandler((event) => {
-  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
-
   if (!event.context.auth)
     return {
       ok: false,
@@ -12,9 +10,7 @@ export default defineEventHandler((event) => {
   const config = useRuntimeConfig();
   if (!config.notionSecret || !config.notionDatabaseId)
     throw new Error("Notion not Enabled");
-  const query = useQuery(event);
-  const message =
-    query.message instanceof Array ? query.message[0] : query.message;
+  const query = event.context.query;
   const tags = query.tag
     ? query.tag instanceof Array
       ? query.tag

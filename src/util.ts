@@ -24,3 +24,11 @@ export const queryVarToString = (
   }
   return queryVar;
 };
+
+export const parseArrayBody = (parameter: string | string[]) => {
+  if (!parameter) return [];
+  if (typeof parameter === "string") {
+    return parameter.split(",").map((x: string) => x.trim());
+  }
+  return parameter;
+};
