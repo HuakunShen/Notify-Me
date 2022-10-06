@@ -1,5 +1,7 @@
 export default defineEventHandler((event) => {
   setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+  setResponseHeader(event, "Access-Control-Allow-Methods", "*");
+  setResponseHeader(event, "Access-Control-Allow-Headers", "*");
 
   const config = useRuntimeConfig();
   return {
