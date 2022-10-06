@@ -12,8 +12,10 @@ export default defineNuxtConfig({
   vite: {
     server: {
       proxy: {
-        "/telegram": {
+        "/": {
+          ws: true,
           changeOrigin: true,
+          target: "https://deploy-preview-5--notify-huakun.netlify.app/"
         },
       },
     },
