@@ -1,4 +1,6 @@
 export default defineEventHandler((event) => {
+  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
+
   const config = useRuntimeConfig();
   return {
     telegram: Boolean(config.telegramBotToken && config.telegramChatId),
