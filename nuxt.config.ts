@@ -12,19 +12,6 @@ export default defineNuxtConfig({
     transpile:
       lifecycle === "build" || lifecycle === "generate" ? ["element-plus"] : [],
   },
-  vite: {
-    server: {
-      proxy: {
-        "/api": {
-          ws: true,
-          changeOrigin: true,
-          // target: "https://deploy-preview-5--notify-huakun.netlify.app/"
-          target: "http://localhost:3000",
-          rewrite: (path) => path.replace(/^\/api/, '')
-        },
-      },
-    },
-  },
   runtimeConfig: {
     // telegram
     telegramBotToken: process.env.telegramBotToken,
