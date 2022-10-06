@@ -1,8 +1,6 @@
 import { sendEmail } from "~~/src/email";
 
 export default defineEventHandler((event) => {
-  setResponseHeader(event, "Access-Control-Allow-Origin", "*");
-
   if (!event.context.auth)
     return {
       ok: false,
