@@ -6,23 +6,24 @@ console.log("log from nuxt.config")
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   css: ["element-plus/dist/index.css"],
+  
   // build: {transpile: ['element-plus']}
   build: {
     transpile:
       lifecycle === "build" || lifecycle === "generate" ? ["element-plus"] : [],
   },
-  vite: {
-    server: {
-      proxy: {
-        "/api": {
-          ws: true,
-          changeOrigin: true,
-          // target: "https://deploy-preview-5--notify-huakun.netlify.app/"
-          rewrite: (path) => path.replace(/^\/api/, '')
-        },
-      },
-    },
-  },
+  // vite: {
+  //   server: {
+  //     proxy: {
+  //       "/api": {
+  //         ws: true,
+  //         changeOrigin: true,
+  //         // target: "https://deploy-preview-5--notify-huakun.netlify.app/"
+  //         rewrite: (path) => path.replace(/^\/api/, '')
+  //       },
+  //     },
+  //   },
+  // },
   runtimeConfig: {
     // telegram
     telegramBotToken: process.env.telegramBotToken,
