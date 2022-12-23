@@ -2,6 +2,10 @@ export const setTheme = (theme?: string) => {
   document.documentElement.setAttribute("data-theme", theme);
 };
 
+// defined in h3 but not exported
+export type QueryValue = string | undefined | null;
+
+
 export const composeMessage = (
   name: string,
   email: string,
@@ -16,7 +20,7 @@ export const composeMessage = (
 };
 
 export const queryVarToString = (
-  queryVar: string | string[] | undefined | null
+  queryVar: QueryValue | QueryValue[]
 ) => {
   if (!queryVar) return "";
   if (queryVar instanceof Array) {

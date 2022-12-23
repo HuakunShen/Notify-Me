@@ -70,3 +70,40 @@ For example,
 - not setting `emailFromAddress` will disable email sending feature.
 
 Disabled features will not be displayed in frontend.
+
+## Third Party API
+
+### Telegram
+
+How to create a Telegram bot to send yourself messages?
+
+
+https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0
+
+#### How to create a Telegram Bot
+
+https://core.telegram.org/bots#how-do-i-create-a-bot
+
+Send `/newbot` to `@BotFater`, and follow the instructions.
+
+#### Telegram API to Send Message
+
+Requires a token and a chat id.
+
+https://core.telegram.org/bots/api#sendmessage
+
+```js
+fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "post",
+    body: {
+        chat_id: chatId,
+        text: message,
+    },
+});
+```
+
+#### Get Chat ID
+
+Send a message to the bot first, then go to `https://api.telegram.org/bot<YOUR BOT TOKEN HERE>/getUpdates` to find the chat id.
+
+Later, telegram messages will be sent to this chat.

@@ -15,7 +15,7 @@ export default defineEventHandler((event) => {
     composeMessage(body.name, body.email, body.message || "no message"),
     config.telegramBotToken,
     config.telegramChatId
-  ).then((ret: { [key: string]: string | boolean | number }) => {
+  ).then((ret: any) => {
     return { ok: ret.ok };
   });
 });

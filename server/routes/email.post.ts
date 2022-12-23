@@ -34,7 +34,12 @@ export default defineEventHandler((event) => {
     emails,
     message,
     "Notify Me Message"
-  ).then((res) => {
-    return { ok: true };
-  });
+  )
+    .then((res) => {
+      return { ok: true };
+    })
+    .catch((err) => {
+      console.error(err);
+      return { ok: false };
+    });
 });

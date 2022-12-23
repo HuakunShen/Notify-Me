@@ -10,7 +10,8 @@ export default defineEventHandler((event) => {
   const config = useRuntimeConfig();
   if (!config.telegramBotToken || !config.telegramChatId)
     throw new Error("Telegram not Enabled");
-  const query = event.context.query;
+  const query = getQuery(event);
+  
   return sendTelegramMessage(
     composeMessage(
       query.name as string,
@@ -19,7 +20,7 @@ export default defineEventHandler((event) => {
     ),
     config.telegramBotToken,
     config.telegramChatId
-  ).then((res: { [key: string]: string | boolean | number }) => {
+  ).then((res: any) => {
     return { ok: res.ok };
   });
 });

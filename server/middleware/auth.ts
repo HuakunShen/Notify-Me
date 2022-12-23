@@ -1,12 +1,14 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
-  if (event.req.method === "GET") {
-    const query = useQuery(event);
+  
+  if (event.node.req.method === "GET") {
+    const query = await getQuery(event)
+    // const query = useQuery(event);
     event.context.auth = !!config.password
       ? config.password === query.password
       : true;
-  } else if (event.req.method === "POST") {
-    const body = await useBody(event);
+  } else if (event.node.req.method === "POST") {
+    const body = await readBody(event)
     event.context.auth = !!config.password
       ? config.password === body.password
       : true;
