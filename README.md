@@ -1,6 +1,19 @@
 # Notify Me
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6c35deee-285a-45ff-8f98-c1f5fd83e759/deploy-status)](https://app.netlify.com/sites/notify-huakun/deploys)
+- [Notify Me](#notify-me)
+  - [Use Cases](#use-cases)
+    - [Send Automatic Message to Yourself](#send-automatic-message-to-yourself)
+    - [Upload to Notion or Database](#upload-to-notion-or-database)
+  - [Supported Platforms](#supported-platforms)
+  - [API Documentation](#api-documentation)
+  - [.env](#env)
+  - [Third Party API](#third-party-api)
+    - [Telegram](#telegram)
+      - [How to create a Telegram Bot](#how-to-create-a-telegram-bot)
+      - [Telegram API to Send Message](#telegram-api-to-send-message)
+      - [Get Chat ID](#get-chat-id)
+    - [Notion API](#notion-api)
+    - [Email](#email)
 
 This project is for sending notification to oneself.
 
@@ -77,7 +90,6 @@ Disabled features will not be displayed in frontend.
 
 How to create a Telegram bot to send yourself messages?
 
-
 https://learn.microsoft.com/en-us/azure/bot-service/bot-service-channel-connect-telegram?view=azure-bot-service-4.0
 
 #### How to create a Telegram Bot
@@ -94,16 +106,35 @@ https://core.telegram.org/bots/api#sendmessage
 
 ```js
 fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "post",
-    body: {
-        chat_id: chatId,
-        text: message,
-    },
+  method: "post",
+  body: {
+    chat_id: chatId,
+    text: message,
+  },
 });
 ```
+
 
 #### Get Chat ID
 
 Send a message to the bot first, then go to `https://api.telegram.org/bot<YOUR BOT TOKEN HERE>/getUpdates` to find the chat id.
 
 Later, telegram messages will be sent to this chat.
+
+### Notion API
+
+1. Go to https://www.notion.so/my-integrations
+2. Click on **"Create new integration**
+3. Give "Read", "Update", "Insert" capabilities.
+4. Integration Type should be "Internal"
+5. Make a copy of the API Key, save it to `.env` file, `notionSecret=<api key>`
+6. Go to the notion table/database, click "Add connection" and select the integration.
+
+
+### Email
+
+- Set email, password and SMPT server address+port in `.env`.
+- For example, for example, if you want to use gmail
+  - You may have to use [App Password](https://support.google.com/accounts/answer/185833?hl=en)
+  - The smtp server is `smtp.gmail.com:587`
+    - [Read More](https://support.google.com/mail/answer/7126229?hl=en#zippy=%2Cstep-change-smtp-other-settings-in-your-email-client)
