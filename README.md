@@ -123,6 +123,10 @@ Later, telegram messages will be sent to this chat.
 
 ### Notion API
 
+Notion Database template: https://huakunshen.notion.site/283649af328f4d429e44d75b41f3c06a?v=4961d433abc8473abe1afcb3e5621350
+
+Duplicate the notion database in your own workspace and continue.
+
 1. Go to https://www.notion.so/my-integrations
 2. Click on **"Create new integration**
 3. Give "Read", "Update", "Insert" capabilities.
