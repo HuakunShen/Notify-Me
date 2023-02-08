@@ -15,6 +15,12 @@
     - [Notion API](#notion-api)
     - [Email](#email)
 
+
+> Click to deploy to Netlify. Don't forget to add environment variables and redeploy, otherwise the webpage will have no service. Read [.env](#env) and [Third Party API](#third-party-api) for more details.
+
+[![](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/HuakunShen/notify-me)
+
+
 This project is for sending notification to oneself.
 
 Seems like a boring useless tool, but I can find some use cases.
